@@ -7,9 +7,15 @@
       "nom": "Element Filaire",
       "layer": "0",
       "insertion": {
-        "x": 2548.4457,
-        "y": 1824.5915,
+        "x": 0.0,
+        "y": 0.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -65,9 +71,15 @@
       "nom": "Element Filaire",
       "layer": "0",
       "insertion": {
-        "x": 2553.4457,
-        "y": 1824.5915,
+        "x": 5.0,
+        "y": 0.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -123,9 +135,15 @@
       "nom": "Element Filaire",
       "layer": "0",
       "insertion": {
-        "x": 2548.4457,
-        "y": 1824.5915,
+        "x": 0.0,
+        "y": 0.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -181,9 +199,15 @@
       "nom": "Force Nodal",
       "layer": "Charge",
       "insertion": {
-        "x": 2558.4457,
-        "y": 1824.5915,
+        "x": 10.0,
+        "y": 0.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -292,9 +316,15 @@
       "nom": "Appuit Simple",
       "layer": "Appuit",
       "insertion": {
-        "x": 2553.4457,
-        "y": 1821.5915,
+        "x": 5.0,
+        "y": -3.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -390,9 +420,15 @@
       "nom": "Encastrement",
       "layer": "Appuit",
       "insertion": {
-        "x": 2547.1154,
-        "y": 1821.9026,
+        "x": -1.3303,
+        "y": -2.6889,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -423,9 +459,15 @@
       "nom": "Articulation",
       "layer": "Charge",
       "insertion": {
-        "x": 2558.4457,
-        "y": 1821.5915,
+        "x": 10.0,
+        "y": -3.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -521,9 +563,15 @@
       "nom": "Element Filaire",
       "layer": "0",
       "insertion": {
-        "x": 2553.4457,
-        "y": 1824.5915,
+        "x": 5.0,
+        "y": 0.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -579,9 +627,15 @@
       "nom": "Element Filaire",
       "layer": "0",
       "insertion": {
-        "x": 2558.4457,
-        "y": 1824.5915,
+        "x": 10.0,
+        "y": 0.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -637,9 +691,15 @@
       "nom": "Force Nodal",
       "layer": "Charge",
       "insertion": {
-        "x": 2552.0802,
-        "y": 1824.5915,
+        "x": 3.6344,
+        "y": 0.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -748,9 +808,15 @@
       "nom": "Charge Uniformement Repartie",
       "layer": "Charge",
       "insertion": {
-        "x": 2553.4457,
-        "y": 1823.5915,
+        "x": 5.0,
+        "y": -1.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -890,9 +956,15 @@
       "nom": "Charge Uniformement Repartie",
       "layer": "Charge",
       "insertion": {
-        "x": 2553.4457,
-        "y": 1821.5915,
+        "x": 5.0,
+        "y": -3.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -1032,9 +1104,15 @@
       "nom": "Element Filaire",
       "layer": "0",
       "insertion": {
-        "x": 2545.4457,
-        "y": 1824.5915,
+        "x": -3.0,
+        "y": 0.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {
@@ -1090,9 +1168,15 @@
       "nom": "Encastrement",
       "layer": "Appuit",
       "insertion": {
-        "x": 2545.4457,
-        "y": 1824.5915,
+        "x": -3.0,
+        "y": 0.0,
         "z": 0.0
+      },
+      "rotation": 0.0,
+      "echelle": {
+        "x": 1.0,
+        "y": 1.0,
+        "z": 1.0
       },
       "lignes": [
         {

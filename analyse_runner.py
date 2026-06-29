@@ -11,7 +11,7 @@ tiont.py doit se trouver dans le même dossier que ce fichier.
 from pathlib import Path
 from typing import Any
 
-import tiont
+import extract_blocs_dynamiques
 
 
 class AnalyseError(Exception):
@@ -25,7 +25,7 @@ def lancer_analyse(chemin_sortie: Path | str) -> dict[str, Any]:
     les données ainsi que le chemin du fichier JSON écrit.
     """
     try:
-        acad = tiont.get_autocad()
+        acad = extract_blocs_dynamiques.get_autocad()
     except Exception as exc:
         raise AnalyseError(
             "AutoCAD n'est pas accessible.\n"
@@ -34,7 +34,7 @@ def lancer_analyse(chemin_sortie: Path | str) -> dict[str, Any]:
         ) from exc
 
     try:
-        model_space = tiont.get_model_space(acad)
+        model_space = extract_blocs_dynamiques.get_model_space(acad)
         filename = Path(acad.ActiveDocument.FullName).stem
     except Exception as exc:
         raise AnalyseError(
@@ -44,8 +44,8 @@ def lancer_analyse(chemin_sortie: Path | str) -> dict[str, Any]:
         ) from exc
 
     try:
-        entites = tiont.lister_entites(model_space)
-        blocs = tiont.collecter_blocs_dynamiques(model_space, acad) 
+        entites = extract_blocs_dynamiques.lister_entites(model_space)
+        blocs = extract_blocs_dynamiques.collecter_blocs_dynamiques(model_space, acad) 
     except Exception as exc:
         raise AnalyseError(
             "Erreur pendant la lecture des entités du dessin.\n\n"
@@ -53,7 +53,7 @@ def lancer_analyse(chemin_sortie: Path | str) -> dict[str, Any]:
         ) from exc
 
     try:
-        fichier_json = tiont.sauvegarder_json(
+        fichier_json = extract_blocs_dynamiques.sauvegarder_json(
             entites=entites,
             blocs=blocs,
             chemin=chemin_sortie,

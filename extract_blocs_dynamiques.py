@@ -1,4 +1,5 @@
 import json
+import math
 import win32com.client
 from pathlib import Path
 
@@ -41,6 +42,24 @@ def pt3(p):
     return {"x": round(p[0], 4), "y": round(p[1], 4), "z": round(p[2], 4)}
 
 
+def get_rotation_echelle(bloc):
+    """Retourne la rotation (en degrés) et les facteurs d'échelle X/Y/Z du bloc."""
+    try:
+        rotation_deg = round(math.degrees(bloc.Rotation), 4)
+    except Exception:
+        rotation_deg = None
+
+    echelle = {}
+    try:
+        echelle["x"] = round(bloc.XScaleFactor, 4)
+        echelle["y"] = round(bloc.YScaleFactor, 4)
+        echelle["z"] = round(bloc.ZScaleFactor, 4)
+    except Exception:
+        echelle = {"x": None, "y": None, "z": None}
+
+    return {"rotation": rotation_deg, "echelle": echelle}
+
+
 def get_lignes_bloc(acad, bloc_name):
     """Retourne toutes les AcDbLine dans la définition du bloc."""
     lignes = []
@@ -72,10 +91,13 @@ def collecter_blocs_dynamiques(model_space, acad):
 
         nom = entity.EffectiveName
         pt  = entity.InsertionPoint
+        rot_ech = get_rotation_echelle(entity)
         blocs.append({
             "nom":       nom,
             "layer":     entity.Layer,
             "insertion": pt3(pt),
+            "rotation":  rot_ech["rotation"],
+            "echelle":   rot_ech["echelle"],
             "lignes":    get_lignes_bloc(acad, nom),
             "attributs": get_attributs(entity),
             "parametres": get_parametres_dynamiques(entity),
@@ -120,8 +142,11 @@ def afficher_blocs(blocs):
         print("  Aucun bloc dynamique trouvé.")
     for i, b in enumerate(blocs, 1):
         ins = b["insertion"]
+        ech = b["echelle"]
         print(f"\n[{i}] Bloc : {b['nom']}  (Layer: {b['layer']})")
         print(f"  Insertion : x={ins['x']}  y={ins['y']}  z={ins['z']}")
+        print(f"  Rotation  : {b['rotation']}°")
+        print(f"  Échelle   : x={ech['x']}  y={ech['y']}  z={ech['z']}")
         if b["lignes"]:
             print(f"  Lignes ({len(b['lignes'])}) :")
             for j, l in enumerate(b["lignes"], 1):
@@ -148,6 +173,6 @@ if __name__ == "__main__":
     sauvegarder_json(
         entites=entites,
         blocs=blocs,
-        chemin=Path(acad.ActiveDocument.FullName).parent / "Autocad Export",
+        chemin=Path(acad.ActiveDocument.FullName).parent / "AutoCADExport",
         filename=Path(acad.ActiveDocument.FullName).stem,
     )
