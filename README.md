@@ -69,29 +69,7 @@ AutoCAD (.dwg) ──► Extraction COM ──► Export JSON ──► Visualis
 
 ## 🖼️ Captures d'écran
 
-> *Ajoutez ici des captures d'écran de l'application.*
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│ Menu Bar                                                     │
-├──────────────────────────────────────────────────────────────┤
-│ Toolbar  [📂 Ouvrir] [💾 Sauver] [🔄 Recharger] [⚙️ Analyse]│
-├──────────┬────────────────────────────┬──────────────────────┤
-│Explorer  │     Workspace (Tables)     │    Properties        │
-│(Tree)    │  ┌─ Résumé Entités ──────┐ │  ┌─ Recherche ─────┐│
-│          │  │ AcDbLine       │  42  │ │  │ Type: AcDbLine   ││
-│          │  │ AcDbBlockRef   │  18  │ │  │ Nombre: 42       ││
-│          │  │ TOTAL          │  60  │ │  │ % : 70%          ││
-│          │  └────────────────┴──────┘ │  └──────────────────┘│
-│          │  ┌─ Blocs Dynamiques ────┐ │                      │
-│          │  │ [Element Filaire] [..] │ │                      │
-│          │  └───────────────────────┘ │                      │
-├──────────┴────────────────────────────┴──────────────────────┤
-│ Console (Log)                                                │
-├──────────────────────────────────────────────────────────────┤
-│ Status Bar                                                   │
-└──────────────────────────────────────────────────────────────┘
-```
+![Interface AutoCAD](images/screanshoot.png)
 
 ---
 
