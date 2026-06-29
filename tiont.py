@@ -37,7 +37,28 @@ def get_parametres_dynamiques(bloc):
     return parametres
 
 
-def collecter_blocs_dynamiques(model_space):
+def pt3(p):
+    return {"x": round(p[0], 4), "y": round(p[1], 4), "z": round(p[2], 4)}
+
+
+def get_lignes_bloc(acad, bloc_name):
+    """Retourne toutes les AcDbLine dans la définition du bloc."""
+    lignes = []
+    try:
+        block_def = acad.ActiveDocument.Blocks.Item(bloc_name)
+        for entity in block_def:
+            if entity.EntityName == "AcDbLine":
+                lignes.append({
+                    "debut": pt3(entity.StartPoint),
+                    "fin":   pt3(entity.EndPoint),
+                    "layer": entity.Layer,
+                })
+    except Exception:
+        pass
+    return lignes
+
+
+def collecter_blocs_dynamiques(model_space, acad):
     blocs = []
     for entity in model_space:
         if entity.EntityName != "AcDbBlockReference":
@@ -49,9 +70,13 @@ def collecter_blocs_dynamiques(model_space):
         except Exception:
             continue
 
+        nom = entity.EffectiveName
+        pt  = entity.InsertionPoint
         blocs.append({
-            "nom": entity.EffectiveName,
-            "layer": entity.Layer,
+            "nom":       nom,
+            "layer":     entity.Layer,
+            "insertion": pt3(pt),
+            "lignes":    get_lignes_bloc(acad, nom),
             "attributs": get_attributs(entity),
             "parametres": get_parametres_dynamiques(entity),
         })
@@ -59,31 +84,19 @@ def collecter_blocs_dynamiques(model_space):
 
 
 def sauvegarder_json(entites, blocs, chemin: str | Path, filename: str = "Default"):
-    """
-    Sauvegarde les données dans chemin.
-    - Si chemin est un dossier (ou se termine sans .json), écrit chemin/filename.json
-    - Si chemin est un fichier .json, écrit directement dans ce fichier
-    Retourne le Path du fichier écrit.
-    """
     chemin = Path(chemin)
     filename_stem = Path(filename).stem
 
     if chemin.suffix.lower() == ".json":
-        # chemin est un fichier cible direct
         fichier = chemin
         fichier.parent.mkdir(parents=True, exist_ok=True)
     else:
-        # chemin est un dossier
-        # Supprimer si c'est un fichier orphelin (ancien bug)
         if chemin.exists() and not chemin.is_dir():
             chemin.unlink()
         chemin.mkdir(parents=True, exist_ok=True)
         fichier = chemin / f"{filename_stem}.json"
 
-    data = {
-        "resume_entites": entites,
-        "blocs_dynamiques": blocs,
-    }
+    data = {"resume_entites": entites, "blocs_dynamiques": blocs}
     with open(fichier, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     print(f"\nFichier JSON enregistré : {fichier}")
@@ -101,12 +114,19 @@ def afficher(entites):
 
 def afficher_blocs(blocs):
     print("\n" + "=" * 60)
-    print("BLOCS DYNAMIQUES — Attributs & Paramètres")
+    print("BLOCS DYNAMIQUES — Coordonnées lignes, Attributs & Paramètres")
     print("=" * 60)
     if not blocs:
         print("  Aucun bloc dynamique trouvé.")
     for i, b in enumerate(blocs, 1):
+        ins = b["insertion"]
         print(f"\n[{i}] Bloc : {b['nom']}  (Layer: {b['layer']})")
+        print(f"  Insertion : x={ins['x']}  y={ins['y']}  z={ins['z']}")
+        if b["lignes"]:
+            print(f"  Lignes ({len(b['lignes'])}) :")
+            for j, l in enumerate(b["lignes"], 1):
+                d, f = l["debut"], l["fin"]
+                print(f"    [{j}] ({d['x']}, {d['y']}, {d['z']}) → ({f['x']}, {f['y']}, {f['z']})  layer={l['layer']}")
         if b["attributs"]:
             print("  Attributs :")
             for tag, val in b["attributs"].items():
@@ -120,9 +140,9 @@ def afficher_blocs(blocs):
 
 if __name__ == "__main__":
     acad = get_autocad()
-    ms = get_model_space(acad)
+    ms   = get_model_space(acad)
     entites = lister_entites(ms)
-    blocs = collecter_blocs_dynamiques(ms)
+    blocs   = collecter_blocs_dynamiques(ms, acad)
     afficher(entites)
     afficher_blocs(blocs)
     sauvegarder_json(

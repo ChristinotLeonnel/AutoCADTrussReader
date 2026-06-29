@@ -45,7 +45,7 @@ def lancer_analyse(chemin_sortie: Path | str) -> dict[str, Any]:
 
     try:
         entites = tiont.lister_entites(model_space)
-        blocs = tiont.collecter_blocs_dynamiques(model_space)
+        blocs = tiont.collecter_blocs_dynamiques(model_space, acad) 
     except Exception as exc:
         raise AnalyseError(
             "Erreur pendant la lecture des entités du dessin.\n\n"

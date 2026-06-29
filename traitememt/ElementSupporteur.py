@@ -41,7 +41,8 @@ def get_complieted_info(element):
     Info = {}
     Info["L"] = element["parametres"]["Longueur"] 
     Info["E"] = element["attributs"]["E"] 
-    Info["I"] = Inertia(element)  
+    Info["I"] = Inertia(sect_param)  # A faire 
+    Info 
 
 
 for i in ElementSupporteur:
